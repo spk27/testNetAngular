@@ -1,1 +1,47 @@
-<p>create-persona works!</p>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Crear Persona</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form>
+            <div class="row">
+                <mat-form-field>
+                    <input matInput [(ngModel)]="nuevaPersona.nombre" placeholder="Nombre"  name="nombre" #nombre="ngModel" required>
+                </mat-form-field>
+                <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert alert-danger">
+                    <div *ngIf="nombre.errors.required">
+                        Nombre de persona es requerido.
+                    </div>
+                </div>
+                <mat-form-field>
+                    <input matInput placeholder="Apellido" [(ngModel)]="nuevaPersona.apellido" name="apellido" #apellido="ngModel" required>
+                </mat-form-field>
+                <div *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)" class="alert alert-danger">
+                    <div *ngIf="apellido.errors.required">
+                        Apellido de persona es requerido.
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <mat-form-field class="col-5">
+                    <input matInput placeholder="Cedula" [(ngModel)]="nuevaPersona.cedula" name="cedula" #cedula="ngModel" required>
+                </mat-form-field>
+                <div *ngIf="cedula.invalid && (cedula.dirty || cedula.touched)" class="alert alert-danger">
+                    <div *ngIf="cedula.errors.required">
+                        Cedula de persona es requerido.
+                    </div>
+                </div>
+                <mat-form-field class="col-5">
+                    <textarea matInput placeholder="Direccion" [(ngModel)]="nuevaPersona.direccion" name="direccion" #direccion="ngModel"></textarea>
+                </mat-form-field>
+            </div>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <div class="row justify-content-end">
+            <button mat-button (click)="onNoClick()">Cerrar</button>
+            <button mat-button (click)="createPersona()" [disabled]="nombre.invalid || apellido.invalid || cedula.invalid">Crear</button>
+        </div>
+        </mat-card-actions>
+</mat-card>
